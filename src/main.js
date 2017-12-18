@@ -3,12 +3,12 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 
-import neo4jVue from './plugins/vue-neo4j';
+import VueNeo4j from 'vue-neo4j';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'vis/dist/vis.css';
 
-Vue.use(neo4jVue);
+Vue.use(VueNeo4j);
 
 Vue.config.productionTip = false;
 

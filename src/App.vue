@@ -28,6 +28,12 @@
                         <Graph v-if="nodes.length && edges.length" :nodes="nodes" :edges="edges" />
                     </div>
                 </div>
+                <div class="row">
+                    <!-- <pre>{{ results }}</pre>
+                    <pre>{{ driver }}</pre>
+                    <pre>{{ nodes }}</pre>
+                    <pre>{{ edges }}</pre> -->
+                </div>
             </div>
         </section>
 
@@ -94,18 +100,14 @@ RETURN startNode(rel) as start, endNode(rel) as end, rel, type(rel) as type`,
             this.loading = true;
             this.results = [];
 
-            const session = this.getSession();
-
-            session.run(this.query)
+            return this.$neo4j.run(this.query)
                 .then(res => {
                     this.results = res.records;
-
-                    session.close();
                 })
                 .catch(e => console.log(e))
-                .then(() => {
+                .finally(() => {
                     this.loading = false;
-                });
+                })
         },
         onConnect(driver) {
             this.driver = driver;
